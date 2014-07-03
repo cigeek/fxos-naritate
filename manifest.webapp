@@ -1,0 +1,21 @@
+{
+  "version": "0.1",
+  "name": "なりたてQ作",
+  "description": "旧作になったばかりの作品一覧が見れる。",
+  "launch_path": "/index.html#panel1",
+  "icons": {
+    "16": "/img/icons/naritate-16.png",
+    "48": "/img/icons/naritate-48.png",
+    "60": "/img/icons/naritate-60.png",
+    "128": "/img/icons/naritate-128.png"
+  },
+  "developer": {
+    "name": "kosk",
+    "url": "http://naritate.kosk.me/"
+  },
+  "default_locale": "ja",
+  "type": "privileged",
+  "permissions": {
+    "systemXHR": "for naritate"
+  }
+}
