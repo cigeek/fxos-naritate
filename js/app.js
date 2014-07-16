@@ -1,14 +1,14 @@
 window.onload = function() {
-  genList('hotMovies', getJSON('http://naritate.kosk.me/api/hot.json'));
+  genList('hotMovies', 'http://naritate.kosk.me/api/hot.json');
 
   var frTab = document.getElementById('tab2');
   frTab.addEventListener('click', function(e) {
-    genList('foreignMovies', getJSON('http://naritate.kosk.me/api/foreign.json'))
+    genList('foreignMovies', 'http://naritate.kosk.me/api/foreign.json')
   }, false);
 
   var jpTab = document.getElementById('tab2');
   frTab.addEventListener('click', function(e) {
-    genList('japaneseMovies', getJSON('http://naritate.kosk.me/api/japanese.json'))
+    genList('japaneseMovies', 'http://naritate.kosk.me/api/japanese.json')
   }, false);
 }
 
@@ -30,12 +30,13 @@ function getJSON(url) {
   return res;
 }
 
-function genList(id, jsonStr) {
+function genList(id, url) {
   var list = document.getElementById(id);
 
   if (!list.children.length) {
     var fragment = document.createDocumentFragment();
 
+    var jsonStr = getJSON(url);
     var jsonData = JSON.parse(jsonStr);
     for (var i in jsonData) {
       var li = document.createElement('li');
