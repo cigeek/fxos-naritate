@@ -6,8 +6,8 @@ window.onload = function() {
     genList('foreignMovies', 'http://naritate.kosk.me/api/foreign.json')
   }, false);
 
-  var jpTab = document.getElementById('tab2');
-  frTab.addEventListener('click', function(e) {
+  var jpTab = document.getElementById('tab3');
+  jpTab.addEventListener('click', function(e) {
     genList('japaneseMovies', 'http://naritate.kosk.me/api/japanese.json')
   }, false);
 }
@@ -38,28 +38,49 @@ function genList(id, url) {
 
     var jsonStr = getJSON(url);
     var jsonData = JSON.parse(jsonStr);
+
+    var tmpLi = document.createElement('li'),
+        tmpAside = document.createElement('aside'), // aside
+        tmpImg = document.createElement('img'), // Cover img
+        tmpTitle = document.createElement('p'),
+        tmpForm = document.createElement('form'),
+        tmpMenu = document.createElement('menu'),
+        tmpButton = document.createElement('button');
+
+    tmpAside.className = 'pack';
+
     for (var i in jsonData) {
-      var li = document.createElement('li');
-      // aside
-      var aside = document.createElement('aside');
-      aside.className = 'pack';
-      // Cover img
-      var img = document.createElement('img');
+      var li = tmpLi.cloneNode(false),
+          aside = tmpAside.cloneNode(false),
+          img = tmpImg.cloneNode(false),
+          title = tmpTitle.cloneNode(false),
+          form = tmpForm.cloneNode(false),
+          menu = tmpMenu.cloneNode(false),
+          favBtn = tmpButton.cloneNode(false),
+          ltrBtn = tmpButton.cloneNode(false);
+
       img.src = 'http://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=' + jsonData[i].asin + '&Format=_SL100_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1';
       aside.appendChild(img);
-      // append aside to list
+      // Append aside to list
       li.appendChild(aside);
 
       // paragraph
-      // title
-      var title = document.createElement('p');
+      // Movie title
       title.appendChild(document.createTextNode(jsonData[i].title));
       li.appendChild(title);
       // buttons
       //<p><form role=\"dialog\" data-type=\"edit\"><menu><button id=\"favBtn" + res[i].id + "\">スキ！ (" + res[i].favs + ")</button><button id=\"" + res[i].id + "\">うーん.. (" + res[i].boos + ")</button></menu></form></p></li>";
-      /*var buttons = document.createElement('p');
-      var favBtn = document.createElement('button');
-      var booBtn = document.createElement('button');*/
+
+      form.setAttribute('role', 'dialog');
+      form.setAttribute('data-type', 'edit');
+      favBtn.id = 'favBtn' + jsonData[i].id;
+      favBtn.appendChild(document.createTextNode('スキ!'));
+      ltrBtn.id = 'ltrBtn' + jsonData[i].id;
+      ltrBtn.appendChild(document.createTextNode('保存'));
+      menu.appendChild(favBtn);
+      menu.appendChild(ltrBtn);
+      form.appendChild(menu);
+      li.appendChild(form);
 
       fragment.appendChild(li);
     }
