@@ -43,7 +43,7 @@ function genList(id, url) {
       _menu = menu.cloneNode(true),
       _form = form.cloneNode(true),
       laterBtn = document.createElement('button');
-  laterBtn.appendChild(document.createTextNode('後で'));
+  laterBtn.appendChild(document.createTextNode('後で見る'));
   laterBtn.className = 'later';
   _menu.appendChild(laterBtn);
   _form.appendChild(_menu);
@@ -64,7 +64,7 @@ function genList(id, url) {
       li.querySelector('.later').addEventListener('click', function(e) {
         if (!localStorage[this.id]) {
           var _title = this.parentNode.parentNode.parentNode.querySelector('p').textContent;
-          alert(_title + ' was added.');
+          alert('『' + _title + '』が"後で見る"リストに追加されました');
           localStorage.setItem(this.id, _title);
         }
       }, false);
@@ -120,7 +120,7 @@ function genListOfLater() {
     li.querySelector('.delete').id = key;
     li.querySelector('.delete').addEventListener('click', function(e) {
       var _title = this.parentNode.parentNode.parentNode.querySelector('p').textContent;
-      alert(_title + ' was deleted.')
+      alert('『' + _title + '』がリストから削除されました')
       list.removeChild(this.parentNode.parentNode.parentNode);
       localStorage.removeItem(this.id);
     }, false);
