@@ -120,9 +120,10 @@ function genListOfLater() {
     li.querySelector('.delete').id = key;
     li.querySelector('.delete').addEventListener('click', function(e) {
       var _title = this.parentNode.parentNode.parentNode.querySelector('p').textContent;
-      alert('『' + _title + '』がリストから削除されました')
-      list.removeChild(this.parentNode.parentNode.parentNode);
-      localStorage.removeItem(this.id);
+      if (confirm('『' + _title + '』をリストから削除しますか？')) {
+        list.removeChild(this.parentNode.parentNode.parentNode);
+        localStorage.removeItem(this.id);
+      }
     }, false);
 
     fragment.appendChild(li);
